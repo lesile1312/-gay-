@@ -1,0 +1,437 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f1f6fc">
+  <meta name="description" content="西南大学姓名 Gay 指数测试，纯属娱乐，请勿当真。">
+  <title>西南大学姓名 Gay 指数测试</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --paper: #f1f6fc;
+      --ink: #12283f;
+      --muted: #60758b;
+      --line: #d6e2ef;
+      --blue: #1d4e89;
+      --blue-deep: #12345c;
+      --blue-wash: #e2edf8;
+      --white: #ffffff;
+      --sky: #d2e5ff;
+      --radius-panel: 24px;
+      --radius-field: 12px;
+      --shadow: 0 22px 70px rgba(29, 78, 137, .10);
+      font-family: "Inter", "SF Pro Display", "Segoe UI", "Microsoft YaHei", sans-serif;
+      font-synthesis: none;
+      text-rendering: optimizeLegibility;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-width: 320px;
+      min-height: 100vh;
+      color: var(--ink);
+      background: radial-gradient(ellipse at 11% 18%, rgba(184,211,244,.24), transparent 32rem), var(--paper);
+    }
+    button, input { font: inherit; }
+    button { cursor: pointer; }
+    button:focus-visible, input:focus-visible, a:focus-visible { outline: 3px solid rgba(29,78,137,.38); outline-offset: 3px; }
+    .shell { width: min(1180px, calc(100% - 56px)); margin: 0 auto; }
+    .topbar { height: 88px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(18,40,63,.12); }
+    .brand { display: flex; align-items: center; gap: 13px; text-decoration: none; color: inherit; }
+    .brand-seal { width: 48px; height: 48px; display: block; flex: none; object-fit: contain; border-radius: 50%; border: 1px solid var(--line); background: white; }
+    .brand-copy { display: grid; gap: 2px; }
+    .brand-copy strong { font-size: 13px; letter-spacing: .06em; }
+    .brand-copy span { color: var(--muted); font-size: 10px; letter-spacing: .16em; text-transform: uppercase; }
+    .top-actions { display: flex; align-items: center; gap: 24px; }
+    .edition { font-size: 11px; color: var(--muted); letter-spacing: .1em; }
+    .history-open { display: inline-flex; align-items: center; gap: 9px; padding: 11px 16px; border: 1px solid var(--line); border-radius: 999px; background: rgba(255,254,250,.65); color: var(--ink); font-size: 12px; font-weight: 700; transition: border-color .18s ease, background .18s ease, transform .18s ease; }
+    .history-open:hover { border-color: var(--blue); background: var(--white); transform: translateY(-1px); }
+    .history-open svg { width: 15px; height: 15px; }
+    .rainbow-line { height: 4px; display: flex; overflow: hidden; border-radius: 5px; margin-top: -2px; width: 74px; }
+    .rainbow-line i { flex: 1; }
+    .rainbow-line i:nth-child(1) { background:#e76557; }
+    .rainbow-line i:nth-child(2) { background:#f2a54a; }
+    .rainbow-line i:nth-child(3) { background:#f2d75c; }
+    .rainbow-line i:nth-child(4) { background:#64ad78; }
+    .rainbow-line i:nth-child(5) { background:#5591bf; }
+    .rainbow-line i:nth-child(6) { background:#8b6da9; }
+    main { padding: 78px 0 74px; }
+    .layout { display: grid; grid-template-columns: minmax(0, 1.04fr) minmax(370px, .78fr); gap: clamp(48px, 8vw, 112px); align-items: center; }
+    .hero { position: relative; padding: 12px 0 22px; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 10px; color: var(--blue); font-size: 11px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
+    .eyebrow::before { content: ""; width: 23px; height: 1px; background: var(--blue); }
+    h1 { margin: 25px 0 20px; max-width: 640px; font-size: clamp(55px, 7.4vw, 94px); line-height: .99; letter-spacing: -.075em; font-weight: 850; }
+    h1 .line { display: block; }
+    h1 .blue { color: var(--blue); }
+    .hero-copy { max-width: 390px; margin: 0; color: var(--muted); font-size: 15px; line-height: 1.85; }
+    .hero-stamp { position: absolute; right: 7%; bottom: 16px; width: 126px; height: 126px; display: grid; align-content: center; justify-items: center; gap: 2px; border-radius: 50%; transform: rotate(9deg); color: var(--blue-deep); border: 1px solid rgba(29,78,137,.26); background: var(--sky); box-shadow: 0 8px 0 rgba(29,78,137,.1); }
+    .hero-stamp strong { font-size: 32px; line-height: 1; letter-spacing: -.08em; }
+    .hero-stamp span { font-size: 9px; font-weight: 850; letter-spacing: .13em; }
+    .scribble { display: flex; align-items: center; gap: 12px; margin-top: 44px; color: #73859a; font-size: 10px; letter-spacing: .12em; }
+    .scribble::before { content: ""; height: 1px; width: 48px; background: #bdcde0; }
+    .tester { overflow: hidden; position: relative; border: 1px solid rgba(29,78,137,.12); border-radius: var(--radius-panel); background: var(--white); box-shadow: var(--shadow); }
+    .tester-top { padding: 28px 30px 24px; background: var(--blue); color: white; position: relative; overflow: hidden; }
+    .tester-top::after { content: "G"; position: absolute; top: -52px; right: 5px; color: rgba(255,255,255,.08); font-weight: 900; font-size: 190px; line-height: 1; letter-spacing: -.12em; transform: rotate(-12deg); pointer-events: none; }
+    .tester-kicker { position: relative; z-index: 1; display: flex; justify-content: space-between; align-items: center; }
+    .tester-kicker span:first-child { font-size: 10px; font-weight: 750; letter-spacing: .15em; }
+    .live-mark { display: inline-flex; align-items: center; gap: 6px; font-size: 9px; letter-spacing: .08em; color: rgba(255,255,255,.78); }
+    .live-mark::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--sky); box-shadow: 0 0 0 3px rgba(210,229,255,.24); }
+    .tester-title { position: relative; z-index: 1; margin: 22px 0 0; font-size: 22px; font-weight: 750; letter-spacing: -.04em; }
+    .tester-title small { display: block; margin-top: 5px; color: rgba(255,255,255,.7); font-size: 11px; font-weight: 450; letter-spacing: .02em; }
+    .tester-body { padding: 27px 30px 30px; }
+    .field-label { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 9px; font-size: 12px; font-weight: 750; }
+    .field-label span:last-child { color: #60758b; font-size: 10px; font-weight: 500; }
+    .name-input { display: block; width: 100%; height: 52px; padding: 0 15px; color: var(--ink); border: 1px solid #d3e0ed; border-radius: var(--radius-field); background: #fafdff; font-size: 14px; transition: border-color .18s, box-shadow .18s, background .18s; }
+    .name-input::placeholder { color: #60758b; opacity: 1; }
+    .name-input:hover { border-color: #99b2cb; }
+    .name-input:focus { outline: none; border-color: var(--blue); background: white; box-shadow: 0 0 0 3px rgba(29,78,137,.12); }
+    .field-help { margin: 9px 0 0; min-height: 17px; color: #60758b; font-size: 10px; line-height: 1.6; }
+    .field-help.error { color: #a63c34; }
+    .submit { width: 100%; height: 52px; margin-top: 20px; display: flex; align-items: center; justify-content: center; gap: 11px; border: 0; border-radius: var(--radius-field); color: white; background: var(--blue); font-size: 13px; font-weight: 800; letter-spacing: .02em; transition: transform .18s ease, background .18s ease, box-shadow .18s ease; }
+    .submit:hover { background: var(--blue-deep); box-shadow: 0 7px 18px rgba(29,78,137,.17); transform: translateY(-1px); }
+    .submit:active { transform: scale(.99); }
+    .submit:disabled { cursor: wait; opacity: .78; }
+    .submit svg { width: 17px; height: 17px; }
+    .result { margin-top: 22px; padding: 20px; border: 1px solid #dfe9f6; border-radius: 17px; background: #f5f9ff; animation: arrive .35s ease both; }
+    .result[hidden] { display: none; }
+    @keyframes arrive { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    .result-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .result-label { color: var(--muted); font-size: 10px; font-weight: 700; letter-spacing: .08em; }
+    .result-person { color: var(--ink); font-size: 13px; font-weight: 750; }
+    .score-row { display: flex; align-items: center; justify-content: space-between; gap: 20px; margin-top: 17px; }
+    .score-copy strong { font-size: 31px; line-height: 1; letter-spacing: -.06em; color: var(--blue); }
+    .score-copy span { margin-left: 4px; color: #60758b; font-size: 12px; }
+    .meter { height: 8px; margin-top: 13px; overflow: hidden; border-radius: 99px; background: #dbe7f4; }
+    .meter-fill { width: 0; height: 100%; border-radius: inherit; background: var(--blue); transition: width 1s cubic-bezier(.2,.8,.2,1); }
+    .score-note { margin: 11px 0 0; color: #3a5573; font-size: 12px; line-height: 1.65; }
+    .copy-result { flex: none; border: 1px solid #cedceb; border-radius: 999px; color: var(--blue); background: white; padding: 8px 11px; font-size: 10px; font-weight: 750; }
+    .copy-result:hover { border-color: var(--blue); }
+    .privacy-line { display: flex; gap: 8px; align-items: flex-start; margin-top: 18px; color: #617067; font-size: 10px; line-height: 1.55; }
+    .privacy-line svg { flex: none; width: 14px; height: 14px; color: var(--blue); }
+    footer { padding: 21px 0 30px; border-top: 1px solid rgba(18,40,63,.12); display: flex; justify-content: space-between; gap: 20px; color: #60758b; font-size: 10px; line-height: 1.6; }
+    footer strong { color: #3d5673; font-weight: 700; }
+    .footer-right { text-align: right; }
+    .overlay { position: fixed; inset: 0; z-index: 10; display: grid; place-items: center; padding: 20px; background: rgba(11,29,21,.5); backdrop-filter: blur(4px); opacity: 0; visibility: hidden; transition: opacity .2s, visibility .2s; }
+    .overlay.open { opacity: 1; visibility: visible; }
+    .history-panel { width: min(470px, 100%); max-height: min(690px, 88vh); display: flex; flex-direction: column; background: var(--white); border-radius: var(--radius-panel); box-shadow: 0 28px 90px rgba(3,24,15,.22); transform: translateY(10px); transition: transform .2s; }
+    .overlay.open .history-panel { transform: translateY(0); }
+    .history-head { padding: 24px 25px 18px; display: flex; align-items: flex-start; justify-content: space-between; border-bottom: 1px solid var(--line); }
+    .history-head h2 { margin: 0; font-size: 20px; letter-spacing: -.04em; }
+    .history-head p { margin: 5px 0 0; color: var(--muted); font-size: 11px; }
+    .history-close { width: 34px; height: 34px; display: grid; place-items: center; border: 1px solid var(--line); border-radius: 50%; background: white; color: var(--ink); }
+    .history-close svg { width: 15px; height: 15px; }
+    .history-list { overflow-y: auto; padding: 12px 16px; }
+    .history-empty { padding: 42px 20px 46px; color: var(--muted); text-align: center; font-size: 12px; line-height: 1.8; white-space: pre-line; }
+    .history-item { width: 100%; display: flex; align-items: center; gap: 14px; padding: 14px 9px; border: 0; border-bottom: 1px solid #ebf1f7; background: transparent; text-align: left; color: var(--ink); }
+    .history-item:hover { background: #f2f7fd; }
+    .history-score { flex: none; width: 44px; height: 44px; display: grid; place-items: center; border-radius: 50%; background: var(--blue-wash); color: var(--blue); font-size: 13px; font-weight: 850; }
+    .history-meta { min-width: 0; display: grid; gap: 4px; }
+    .history-meta strong { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 12px; }
+    .history-meta span { color: var(--muted); font-size: 10px; }
+    .history-foot { padding: 15px 23px 20px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; align-items: center; gap: 15px; }
+    .history-foot span { color: #60758b; font-size: 10px; }
+    .clear-history { border: 0; padding: 7px 0; color: var(--blue); background: transparent; font-size: 11px; font-weight: 750; }
+    .clear-history:disabled { cursor: default; opacity: .45; }
+    .toast { position: fixed; left: 50%; bottom: 25px; z-index: 20; padding: 11px 16px; border-radius: 999px; color: white; background: var(--blue-deep); box-shadow: var(--shadow); font-size: 12px; opacity: 0; pointer-events: none; transform: translate(-50%, 8px); transition: .2s ease; }
+    .toast.show { opacity: 1; transform: translate(-50%, 0); }
+    @media (max-width: 860px) {
+      .shell { width: min(680px, calc(100% - 36px)); }
+      main { padding: 50px 0 52px; }
+      .layout { grid-template-columns: 1fr; gap: 38px; }
+      .hero { padding-bottom: 0; }
+      h1 { max-width: 570px; font-size: clamp(54px, 12vw, 78px); }
+      .hero-stamp { width: 100px; height: 100px; right: 4%; bottom: 8px; }
+      .hero-stamp strong { font-size: 26px; }
+      .tester { max-width: 560px; }
+    }
+    @media (max-width: 520px) {
+      .shell { width: calc(100% - 30px); }
+      .topbar { height: 74px; }
+      .brand-seal { width: 48px; height: 48px; display: block; flex: none; object-fit: contain; border-radius: 50%; border: 1px solid var(--line); background: white; }
+      .brand-copy strong { font-size: 11px; }
+      .edition { display: none; }
+      .top-actions { gap: 10px; }
+      .history-open { padding: 10px 12px; font-size: 11px; }
+      .history-open svg { width: 14px; }
+      main { padding: 39px 0 43px; }
+      .layout { gap: 31px; }
+      h1 { margin-top: 19px; font-size: clamp(49px, 14vw, 66px); }
+      .hero-copy { max-width: 300px; font-size: 13px; }
+      .hero-stamp { position: relative; right: auto; bottom: auto; margin: 22px 0 0 auto; width: 82px; height: 82px; }
+      .hero-stamp strong { font-size: 21px; }
+      .hero-stamp span { font-size: 8px; }
+      .scribble { margin-top: -20px; font-size: 8px; }
+      .tester-top { padding: 24px 21px 20px; }
+      .tester-body { padding: 23px 21px 23px; }
+      .tester-title { font-size: 20px; }
+      footer { font-size: 9px; }
+      .footer-right { max-width: 135px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="shell topbar">
+    <a class="brand" href="#" aria-label="西南大学 Gay 指数测试首页">
+      <img class="brand-seal" src="assets/swu-emblem.png" alt="西南大学校徽">
+      <span class="brand-copy"><strong>西南大学姓名测试</strong><span>name gay index · campus edition</span></span>
+    </a>
+    <div class="top-actions">
+      <span class="edition">校园版 · 仅供娱乐</span>
+      <button class="history-open" id="openHistory" type="button" aria-haspopup="dialog" aria-controls="historyDialog">
+        <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 5.5h12M4 10h12M4 14.5h8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="2.5" cy="5.5" r=".7" fill="currentColor"/><circle cx="2.5" cy="10" r=".7" fill="currentColor"/><circle cx="2.5" cy="14.5" r=".7" fill="currentColor"/></svg>
+        历史记录
+      </button>
+    </div>
+  </header>
+  <div class="shell"><div class="rainbow-line" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+
+  <main class="shell">
+    <div class="layout">
+      <section class="hero" aria-labelledby="pageTitle">
+        <div class="eyebrow">SWU · NAME GAY INDEX</div>
+        <h1 id="pageTitle"><span class="line">西南大学</span><span class="line blue">姓名 Gay</span><span class="line">指数测试</span></h1>
+        <p class="hero-copy">输入姓名，生成一份“看起来很科学”的 Gay 指数报告。分数只供娱乐，不代表真实取向。</p>
+        <div class="hero-stamp" aria-label="百分百娱乐">
+          <strong>100%</strong><span>FOR FUN</span><span>纯属娱乐</span>
+        </div>
+        <div class="scribble">SWU · NAME GAY INDEX TEST</div>
+      </section>
+
+      <section class="tester" aria-label="西南大学姓名 Gay 指数测试器">
+        <div class="tester-top">
+          <div class="tester-kicker"><span>SWU NAME GAY INDEX</span><span class="live-mark">离线可用</span></div>
+          <h2 class="tester-title">西南大学姓名 Gay 指数测试<small>输入姓名，看看随机得到的娱乐分数</small></h2>
+        </div>
+        <div class="tester-body">
+          <form id="testForm" novalidate>
+            <label class="field-label" for="nameInput"><span>姓名 / 昵称</span><span>最多 24 个字符</span></label>
+            <input class="name-input" id="nameInput" name="name" type="text" maxlength="24" autocomplete="off" placeholder="例如：张三 / 今天不想上早八" aria-describedby="fieldHelp">
+            <p class="field-help" id="fieldHelp">分数只由姓名生成，固定可复现；不上传、不保存输入内容到服务器。</p>
+            <button class="submit" id="submitButton" type="submit">
+              <span id="buttonText">开始测试</span>
+              <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M3.5 10h12m-5-5 5 5-5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </form>
+
+          <section class="result" id="result" aria-live="polite" aria-atomic="true" hidden>
+            <div class="result-head">
+              <div><div class="result-label">西南大学姓名 Gay 指数 · 娱乐版</div><div class="result-person" id="resultName"></div></div>
+              <button class="copy-result" id="copyResult" type="button">复制结果</button>
+            </div>
+            <div class="score-row">
+              <div class="score-copy"><strong id="scoreNumber">0</strong><span>%</span></div>
+              <span class="result-label">彩虹浓度</span>
+            </div>
+            <div class="meter" role="progressbar" aria-label="娱乐指数" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="meter-fill" id="meterFill"></div></div>
+            <p class="score-note" id="scoreNote"></p>
+          </section>
+
+          <div class="privacy-line">
+            <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 2.7 16 5v4.7c0 3.5-2.3 6.1-6 7.6-3.7-1.5-6-4.1-6-7.6V5l6-2.3Z" stroke="currentColor" stroke-width="1.35" stroke-linejoin="round"/><path d="m7.4 9.8 1.7 1.7 3.6-3.8" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>纯前端本地计算。分数是姓名哈希生成的娱乐数字，不代表任何人的真实性取向。</span>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="shell">
+    <div><strong>SWU 姓名 Gay 指数</strong> · 一个校园玩笑，请友善分享。</div>
+    <div class="footer-right">非西南大学官方页面 · 不收集个人信息</div>
+  </footer>
+
+  <div class="overlay" id="historyDialog" role="dialog" aria-modal="true" aria-labelledby="historyTitle" aria-hidden="true">
+    <section class="history-panel">
+      <div class="history-head">
+        <div><h2 id="historyTitle">最近测试的姓名</h2><p>只保存在当前浏览器 · 最多 10 条</p></div>
+        <button class="history-close" id="closeHistory" type="button" aria-label="关闭历史记录">
+          <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m5 5 10 10M15 5 5 15" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+      <div class="history-list" id="historyList"></div>
+      <div class="history-foot"><span>点一条记录即可重新查看</span><button class="clear-history" id="clearHistory" type="button">清空记录</button></div>
+    </section>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    (() => {
+      const STORAGE_KEY = "swu-gaynum-history-v1";
+      const form = document.querySelector("#testForm");
+      const input = document.querySelector("#nameInput");
+      const help = document.querySelector("#fieldHelp");
+      const submitButton = document.querySelector("#submitButton");
+      const buttonText = document.querySelector("#buttonText");
+      const result = document.querySelector("#result");
+      const resultName = document.querySelector("#resultName");
+      const scoreNumber = document.querySelector("#scoreNumber");
+      const meter = document.querySelector(".meter");
+      const meterFill = document.querySelector("#meterFill");
+      const scoreNote = document.querySelector("#scoreNote");
+      const dialog = document.querySelector("#historyDialog");
+      const historyList = document.querySelector("#historyList");
+      const clearHistoryButton = document.querySelector("#clearHistory");
+      const toast = document.querySelector("#toast");
+      let activeRecord = null;
+      let toastTimer = null;
+
+      function readHistory() {
+        try {
+          const parsed = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+          return Array.isArray(parsed) ? parsed.filter(item =>
+            item && typeof item.name === "string" && Number.isFinite(item.score) && typeof item.date === "string"
+          ).slice(0, 10) : [];
+        } catch { return []; }
+      }
+      function saveHistory(entries) {
+        try { localStorage.setItem(STORAGE_KEY, JSON.stringify(entries.slice(0, 10))); }
+        catch { showToast("浏览器未允许保存历史记录"); }
+      }
+      function scoreForName(name) {
+        let hash = 2166136261;
+        for (const char of name.normalize("NFC")) {
+          hash ^= char.codePointAt(0);
+          hash = Math.imul(hash, 16777619);
+        }
+        return 1 + ((hash >>> 0) % 100);
+      }
+      function lineForScore(score) {
+        if (score >= 90) return "彩虹频道信号满格。请把主角光环分一点给室友。";
+        if (score >= 70) return "检测到高浓度快乐气息，建议继续保持做自己的松弛感。";
+        if (score >= 45) return "姓名自带一点彩虹滤镜，今天的气氛组有你一席。";
+        if (score >= 20) return "指数正在慢热加载中，先去吃顿好吃的再说。";
+        return "姓名走的是低调路线，但快乐不看指数。";
+      }
+      function showToast(message) {
+        toast.textContent = message;
+        toast.classList.add("show");
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => toast.classList.remove("show"), 2200);
+      }
+      function renderResult(record) {
+        activeRecord = record;
+        result.hidden = false;
+        resultName.textContent = record.name;
+        scoreNumber.textContent = String(record.score);
+        scoreNote.textContent = lineForScore(record.score);
+        meter.setAttribute("aria-valuenow", String(record.score));
+        meterFill.style.width = record.score + "%";
+        result.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      }
+      function renderHistory() {
+        const entries = readHistory();
+        historyList.replaceChildren();
+        clearHistoryButton.disabled = entries.length === 0;
+        if (!entries.length) {
+          const empty = document.createElement("div");
+          empty.className = "history-empty";
+          empty.textContent = "这里还空空的。\n输入一个姓名，开始你的第一条记录吧。";
+          historyList.append(empty);
+          return;
+        }
+        for (const entry of entries) {
+          const button = document.createElement("button");
+          button.className = "history-item";
+          button.type = "button";
+          const score = document.createElement("span");
+          score.className = "history-score";
+          score.textContent = entry.score + "%";
+          const meta = document.createElement("span");
+          meta.className = "history-meta";
+          const name = document.createElement("strong");
+          name.textContent = entry.name;
+          const date = document.createElement("span");
+          date.textContent = entry.date;
+          meta.append(name, date);
+          button.append(score, meta);
+          button.addEventListener("click", () => {
+            input.value = entry.name;
+            renderResult(entry);
+            closeHistory();
+          });
+          historyList.append(button);
+        }
+      }
+      function openHistory() {
+        renderHistory();
+        dialog.classList.add("open");
+        dialog.setAttribute("aria-hidden", "false");
+        document.body.style.overflow = "hidden";
+        document.querySelector("#closeHistory").focus();
+      }
+      function closeHistory() {
+        dialog.classList.remove("open");
+        dialog.setAttribute("aria-hidden", "true");
+        document.body.style.overflow = "";
+        document.querySelector("#openHistory").focus();
+      }
+
+      form.addEventListener("submit", event => {
+        event.preventDefault();
+        const name = input.value.trim();
+        if (!name) {
+          help.textContent = "先输入姓名或昵称，再开始测试吧。";
+          help.classList.add("error");
+          input.focus();
+          return;
+        }
+        help.textContent = "分数只由姓名生成，固定可复现；不上传、不保存输入内容到服务器。";
+        help.classList.remove("error");
+        submitButton.disabled = true;
+        buttonText.textContent = "正在读取名字的彩虹信号…";
+        result.hidden = true;
+        window.setTimeout(() => {
+          const record = {
+            name,
+            score: scoreForName(name),
+            date: new Date().toLocaleString("zh-CN", { month: "numeric", day: "numeric", hour: "2-digit", minute: "2-digit" })
+          };
+          const entries = [record, ...readHistory().filter(item => item.name !== name)].slice(0, 10);
+          saveHistory(entries);
+          renderResult(record);
+          submitButton.disabled = false;
+          buttonText.textContent = "再测一次";
+        }, 700);
+      });
+
+      document.querySelector("#openHistory").addEventListener("click", openHistory);
+      document.querySelector("#closeHistory").addEventListener("click", closeHistory);
+      dialog.addEventListener("click", event => { if (event.target === dialog) closeHistory(); });
+      document.addEventListener("keydown", event => { if (event.key === "Escape" && dialog.classList.contains("open")) closeHistory(); });
+      clearHistoryButton.addEventListener("click", () => {
+        saveHistory([]);
+        renderHistory();
+        showToast("历史记录已清空");
+      });
+      document.querySelector("#copyResult").addEventListener("click", async () => {
+        if (!activeRecord) return;
+        const text = "「" + activeRecord.name + "」的西南大学姓名 Gay 指数是 " + activeRecord.score + "%（纯属娱乐，请勿当真）";
+        try {
+          await navigator.clipboard.writeText(text);
+          showToast("结果已复制，记得友善分享");
+        } catch { showToast("复制失败，可以手动选中结果"); }
+      });
+      input.addEventListener("input", () => {
+        if (help.classList.contains("error") && input.value.trim()) {
+          help.classList.remove("error");
+          help.textContent = "分数只由姓名生成，固定可复现；不上传、不保存输入内容到服务器。";
+        }
+      });
+
+      const sharedName = new URLSearchParams(location.search).get("name");
+      if (sharedName) {
+        input.value = sharedName.slice(0, 24);
+        form.requestSubmit();
+      }
+    })();
+  </script>
+</body>
+</html>
+
+
+
